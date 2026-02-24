@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salt Landscaping — Design Excellence Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --cream: #f4f1eb;
+    --sage: #7a8c6e;
+    --sage-light: #c2ccb8;
+    --sage-dark: #4a5a40;
+    --terracotta: #c4724e;
+    --stone: #b8b0a2;
+    --stone-light: #ddd8d0;
+    --warm-white: #faf8f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 2.5rem 2rem 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .header-brand {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-title em { font-style: italic; color: var(--sage-dark); }
+
+  .header-desc {
+    font-size: 0.85rem;
+    color: #6b6860;
+    max-width: 560px;
+  }
+
+  .project-info {
+    max-width: 860px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .project-field { display: flex; flex-direction: column; gap: 0.25rem; }
+
+  .project-field label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+  }
+
+  .project-field input {
+    background: var(--warm-white);
+    border: 1px solid var(--stone-light);
+    border-radius: 2px;
+    padding: 0.5rem 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .project-field input:focus { border-color: var(--sage); }
+
+  /* PROGRESS */
+  .progress-section {
+    max-width: 860px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .progress-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(184,176,162,0.3);
+    border-radius: 2px;
+    padding: 1rem 1.25rem;
+  }
+
+  .progress-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-card-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .progress-card.required .progress-card-title { color: var(--sage-dark); }
+  .progress-card.elevating .progress-card-title { color: var(--terracotta); }
+
+  .progress-card-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .progress-card.required .progress-card-count { color: var(--sage-dark); }
+  .progress-card.elevating .progress-card-count { color: var(--terracotta); }
+
+  .progress-bar-container {
+    border-radius: 100px;
+    height: 5px;
+    overflow: hidden;
+    margin-bottom: 0.35rem;
+  }
+
+  .progress-card.required .progress-bar-container { background: var(--sage-light); }
+  .progress-card.elevating .progress-bar-container { background: #e8cfc4; }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .progress-card.required .progress-bar-fill { background: var(--sage); }
+  .progress-card.elevating .progress-bar-fill { background: var(--terracotta); }
+
+  .progress-card-sub {
+    font-size: 0.7rem;
+    color: var(--stone);
+  }
+
+  .progress-card-sub strong { font-weight: 500; }
+
+  /* STATUS BANNER */
+  .status-banner {
+    max-width: 860px;
+    margin: 1rem auto 0;
+    padding: 0 2rem;
+  }
+
+  .status-inner {
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: center;
+    transition: all 0.4s ease;
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .status-inner.visible {
+    opacity: 1;
+    height: auto;
+    padding: 0.6rem 1rem;
+  }
+
+  .status-inner.success {
+    background: rgba(122,140,110,0.12);
+    color: var(--sage-dark);
+    border: 1px solid var(--sage-light);
+  }
+
+  .status-inner.warning {
+    background: rgba(196,114,78,0.08);
+    color: var(--terracotta);
+    border: 1px solid #e8cfc4;
+  }
+
+  /* SECTION DIVIDERS */
+  .section-divider {
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+    padding: 0 2rem;
+  }
+
+  .section-divider-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-divider-line { flex: 1; height: 1px; background: var(--stone-light); }
+
+  .section-divider-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .section-divider.required .section-divider-label { color: var(--sage-dark); }
+  .section-divider.elevating .section-divider-label { color: var(--terracotta); }
+
+  .section-divider-desc {
+    font-size: 0.8rem;
+    color: #6b6860;
+    margin-top: 0.35rem;
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    max-width: 860px;
+    margin: 1.25rem auto 0;
+    padding: 0 2rem;
+  }
+
+  .category { margin-bottom: 1.75rem; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .category-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--sage-light);
+    line-height: 1;
+  }
+
+  .category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+
+  .check-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0 1rem;
+    align-items: start;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.4rem;
+    background: var(--warm-white);
+    border: 1px solid rgba(184,176,162,0.25);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .check-item:hover { border-color: var(--sage-light); }
+
+  .check-item.checked {
+    border-left: 3px solid var(--sage);
+    background: rgba(122,140,110,0.04);
+  }
+
+  .check-item.na {
+    opacity: 0.45;
+    border-left: 3px solid var(--stone-light);
+  }
+
+  .checkbox-wrapper {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+  }
+
+  .checkbox-wrapper input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    margin: 0;
+  }
+
+  .checkbox-visual {
+    position: absolute;
+    top: 0; left: 0;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--sage-light);
+    border-radius: 2px;
+    background: white;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checkbox-visual svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
+  }
+
+  .checkbox-wrapper input:checked + .checkbox-visual {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+
+  .checkbox-wrapper input:checked + .checkbox-visual svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .item-content { min-width: 0; }
+
+  .item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.15rem;
+  }
+
+  .item-check-for {
+    font-size: 0.8rem;
+    color: #6b6860;
+    line-height: 1.5;
+  }
+
+  .na-toggle {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .na-toggle:hover { border-color: var(--stone-light); color: var(--ink); }
+  .na-toggle.active { background: var(--stone-light); color: var(--ink); }
+
+  .item-notes { grid-column: 1 / -1; margin-top: 0.5rem; }
+
+  .notes-toggle {
+    font-size: 0.7rem;
+    color: var(--sage);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    padding: 0;
+    transition: color 0.2s;
+  }
+
+  .notes-toggle:hover { color: var(--sage-dark); }
+
+  .notes-textarea {
+    display: none;
+    width: 100%;
+    margin-top: 0.35rem;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--stone-light);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: white;
+    resize: vertical;
+    min-height: 50px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .notes-textarea:focus { border-color: var(--sage); }
+  .notes-textarea.visible { display: block; }
+
+  .footer {
+    text-align: center;
+    padding: 2.5rem 2rem 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-dark);
+    line-height: 1.5;
+  }
+
+  @media print {
+    body { background: white; }
+    .check-item { break-inside: avoid; }
+    .progress-section, .status-banner { display: none; }
+    .notes-toggle { display: none; }
+    .notes-textarea.visible { display: block; border: 1px solid #ccc; }
+  }
+
+  @media (max-width: 600px) {
+    .project-info, .progress-section { grid-template-columns: 1fr; }
+    .check-item { padding: 0.75rem; gap: 0 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <p class="header-brand">Salt Landscaping</p>
+  <h1 class="header-title">Design Excellence <em>Checklist</em></h1>
+  <p class="header-desc">Every project must hit all 7 non-negotiables. Then aim for at least 5 of the 11 elevating principles to push the work from good to extraordinary.</p>
+</header>
+
+<div class="project-info">
+  <div class="project-field">
+    <label>Project Name</label>
+    <input type="text" placeholder="e.g. 42 Riverside Terrace">
+  </div>
+  <div class="project-field">
+    <label>Reviewed By</label>
+    <input type="text" placeholder="Name">
+  </div>
+</div>
+
+<div class="progress-section">
+  <div class="progress-card required">
+    <div class="progress-card-header">
+      <span class="progress-card-title">Non-Negotiables</span>
+      <span class="progress-card-count" id="reqCount">0 / 7</span>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="reqFill"></div>
+    </div>
+    <div class="progress-card-sub">All 7 required on every project</div>
+  </div>
+  <div class="progress-card elevating">
+    <div class="progress-card-header">
+      <span class="progress-card-title">Elevating Principles</span>
+      <span class="progress-card-count" id="elevCount">0 / 11</span>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="elevFill"></div>
+    </div>
+    <div class="progress-card-sub">Aim for <strong>at least 5</strong> — more where the site allows</div>
+  </div>
+</div>
+
+<div class="status-banner">
+  <div class="status-inner" id="statusBanner"></div>
+</div>
+
+<div class="section-divider required">
+  <div class="section-divider-inner">
+    <div class="section-divider-line"></div>
+    <span class="section-divider-label">Non-Negotiables — All 7 Required</span>
+    <div class="section-divider-line"></div>
+  </div>
+  <p class="section-divider-desc">These form the baseline of every Salt Landscaping project. No exceptions.</p>
+</div>
+
+<div class="checklist" id="requiredList"></div>
+
+<div class="section-divider elevating">
+  <div class="section-divider-inner">
+    <div class="section-divider-line"></div>
+    <span class="section-divider-label">Elevating Principles — Aim for 5+</span>
+    <div class="section-divider-line"></div>
+  </div>
+  <p class="section-divider-desc">These push a project from good to extraordinary. Apply wherever the site and scope allow.</p>
+</div>
+
+<div class="checklist" id="elevatingList"></div>
+
+<footer class="footer">
+  <p class="footer-quote">"The difference between a yard and a landscape is intention."</p>
+</footer>
+
+<script>
+const requiredData = [
+  {
+    category: "Composition & Restraint",
+    items: [
+      { id: "outdoor-rooms", title: "Outdoor Rooms", check: "Every area has a named purpose and is physically defined with walls, floors, and ceilings" },
+      { id: "focal", title: "Focal Point Terminus", check: "Every sight line ends on something deliberate — no accidental views of utilities or bare fences" },
+      { id: "honest", title: "Honest Materials", check: "All materials are genuine — no faux stone, artificial turf, or composite imitations" },
+      { id: "drifts", title: "Drifts Not Specimens", check: "Planting uses flowing masses and repetition rather than one-of-each collecting" },
+      { id: "negative", title: "Negative Space", check: "Restraint is exercised — empty space is used deliberately, not everything is filled" },
+    ]
+  },
+  {
+    category: "Planting Fundamentals",
+    items: [
+      { id: "right-plant", title: "Right Plant, Right Place", check: "Plants are matched to existing site conditions rather than fighting them" },
+      { id: "seasonal", title: "Seasonal Choreography", check: "Something performs in every season — the landscape has no off-season" },
+    ]
+  }
+];
+
+const elevatingData = [
+  {
+    category: "Shaping Space",
+    items: [
+      { id: "thresholds", title: "Threshold Moments", check: "Transitions between spaces are marked — gates, arbors, material changes, or narrowing passages" },
+      { id: "tension-release", title: "Tension & Release", check: "Spatial sequence includes compression through tight spaces before opening into expansive ones" },
+    ]
+  },
+  {
+    category: "Choreographing Movement",
+    items: [
+      { id: "desire-paths", title: "Desire Paths", check: "Paths follow natural movement patterns rather than imposed geometry" },
+      { id: "mystery-bend", title: "The Mystery of the Bend", check: "The full landscape is never visible at once — concealment and partial views create curiosity" },
+      { id: "arrival-denial", title: "Arrival Denial", check: "The approach to key destinations is indirect, building anticipation before delivery" },
+      { id: "haptic", title: "Haptic Transitions", check: "Ground materials change intentionally to signal pace shifts and zone boundaries" },
+    ]
+  },
+  {
+    category: "The Senses Beyond Sight",
+    items: [
+      { id: "sound", title: "Sound Design", check: "Acoustic experience is considered — water, rustling grasses, gravel, wind, noise masking" },
+      { id: "night", title: "Night Architecture", check: "Lighting is designed for shadow and atmosphere, not just visibility" },
+    ]
+  },
+  {
+    category: "Deeper Craft",
+    items: [
+      { id: "borrowed", title: "Borrowed Scenery", check: "Views beyond the property boundary are intentionally framed and incorporated" },
+      { id: "layers", title: "Vertical Layering", check: "Planting works in multiple layers — canopy, understory, shrub, herbaceous, ground cover" },
+      { id: "patina", title: "Decay & Patina", check: "Materials are chosen for how they will age and improve over decades" },
+    ]
+  },
+];
+
+const REQUIRED_TOTAL = 7;
+const ELEV_TOTAL = 11;
+const ELEV_TARGET = 5;
+const state = { required: {}, elevating: {} };
+
+const checkSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
+function buildItems(categories, tier) {
+  let html = '';
+  categories.forEach(cat => {
+    html += `<div class="category"><div class="category-header"><h2 class="category-title">${cat.category}</h2></div>`;
+    cat.items.forEach(item => {
+      html += `
+        <div class="check-item" id="item-${item.id}">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" data-id="${item.id}" data-tier="${tier}" onchange="handleCheck(this)">
+            <div class="checkbox-visual">${checkSvg}</div>
+          </div>
+          <div class="item-content">
+            <div class="item-title">${item.title}</div>
+            <div class="item-check-for">${item.check}</div>
+            <div class="item-notes">
+              <button class="notes-toggle" onclick="toggleNotes(this)">+ Add note</button>
+              <textarea class="notes-textarea" placeholder="Notes on how this was addressed..."></textarea>
+            </div>
+          </div>
+          <button class="na-toggle" data-id="${item.id}" data-tier="${tier}" onclick="handleNA(this)">N/A</button>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+  return html;
+}
+
+document.getElementById('requiredList').innerHTML = buildItems(requiredData, 'required');
+document.getElementById('elevatingList').innerHTML = buildItems(elevatingData, 'elevating');
+
+function countTier(tier) {
+  let checked = 0, na = 0;
+  for (const id in state[tier]) {
+    if (state[tier][id] === 'checked') checked++;
+    if (state[tier][id] === 'na') na++;
+  }
+  return { checked, na };
+}
+
+function updateProgress() {
+  const req = countTier('required');
+  const elev = countTier('elevating');
+
+  document.getElementById('reqCount').textContent = `${req.checked} / ${REQUIRED_TOTAL}`;
+  document.getElementById('reqFill').style.width = ((req.checked / REQUIRED_TOTAL) * 100) + '%';
+
+  document.getElementById('elevCount').textContent = `${elev.checked} / ${ELEV_TOTAL}`;
+  const elevPct = Math.min((elev.checked / ELEV_TARGET) * 100, 100);
+  document.getElementById('elevFill').style.width = elevPct + '%';
+
+  // Status
+  const banner = document.getElementById('statusBanner');
+  const anyActivity = req.checked + req.na + elev.checked + elev.na > 0;
+  const allReqMet = req.checked >= REQUIRED_TOTAL;
+  const elevMet = elev.checked >= ELEV_TARGET;
+
+  if (!anyActivity) {
+    banner.className = 'status-inner';
+    return;
+  }
+
+  if (allReqMet && elevMet) {
+    banner.className = 'status-inner visible success';
+    banner.textContent = `✓ Excellence threshold met — ${req.checked + elev.checked} of 18 principles applied`;
+  } else if (allReqMet) {
+    const remaining = ELEV_TARGET - elev.checked;
+    banner.className = 'status-inner visible success';
+    banner.textContent = remaining > 0
+      ? `✓ All non-negotiables met. ${remaining} more elevating principle${remaining > 1 ? 's' : ''} to hit the target.`
+      : `✓ Excellence threshold met — ${req.checked + elev.checked} of 18 principles applied`;
+  } else {
+    const missing = REQUIRED_TOTAL - req.checked;
+    banner.className = 'status-inner visible warning';
+    banner.textContent = `${missing} non-negotiable${missing > 1 ? 's' : ''} still to address`;
+  }
+}
+
+function handleCheck(el) {
+  const { id, tier } = el.dataset;
+  const item = document.getElementById('item-' + id);
+  if (el.checked) {
+    state[tier][id] = 'checked';
+    item.classList.add('checked');
+    item.classList.remove('na');
+    item.querySelector('.na-toggle').classList.remove('active');
+  } else {
+    delete state[tier][id];
+    item.classList.remove('checked');
+  }
+  updateProgress();
+}
+
+function handleNA(btn) {
+  const { id, tier } = btn.dataset;
+  const item = document.getElementById('item-' + id);
+  const checkbox = item.querySelector('input[type="checkbox"]');
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    item.classList.remove('na');
+    delete state[tier][id];
+  } else {
+    btn.classList.add('active');
+    item.classList.add('na');
+    item.classList.remove('checked');
+    checkbox.checked = false;
+    state[tier][id] = 'na';
+  }
+  updateProgress();
+}
+
+function toggleNotes(btn) {
+  const textarea = btn.nextElementSibling;
+  textarea.classList.toggle('visible');
+  btn.textContent = textarea.classList.contains('visible') ? '− Hide note' : '+ Add note';
+  if (textarea.classList.contains('visible')) textarea.focus();
+}
+</script>
+
+</body>
+</html>
