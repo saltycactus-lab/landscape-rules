@@ -79,7 +79,7 @@
     font-weight: 500;
   }
 
-  .project-field input {
+  .project-field input, .project-field textarea {
     background: var(--warm-white);
     border: 1px solid var(--stone-light);
     border-radius: 2px;
@@ -91,7 +91,7 @@
     transition: border-color 0.2s;
   }
 
-  .project-field input:focus { border-color: var(--sage); }
+  .project-field input:focus, .project-field textarea:focus { border-color: var(--sage); }
 
   /* PROGRESS */
   .progress-section {
@@ -157,11 +157,7 @@
   .progress-card.required .progress-bar-fill { background: var(--sage); }
   .progress-card.elevating .progress-bar-fill { background: var(--terracotta); }
 
-  .progress-card-sub {
-    font-size: 0.7rem;
-    color: var(--stone);
-  }
-
+  .progress-card-sub { font-size: 0.7rem; color: var(--stone); }
   .progress-card-sub strong { font-weight: 500; }
 
   /* STATUS BANNER */
@@ -247,14 +243,6 @@
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 0.6rem;
-  }
-
-  .category-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 300;
-    color: var(--sage-light);
-    line-height: 1;
   }
 
   .category-title {
@@ -409,6 +397,121 @@
   .notes-textarea:focus { border-color: var(--sage); }
   .notes-textarea.visible { display: block; }
 
+  /* RENDERER NOTES */
+  .renderer-section {
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+    padding: 0 2rem;
+  }
+
+  .renderer-section .section-divider-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .renderer-section .section-divider-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .renderer-section .section-divider-line { flex: 1; height: 1px; background: var(--stone-light); }
+
+  .renderer-desc {
+    font-size: 0.8rem;
+    color: #6b6860;
+    margin-bottom: 0.75rem;
+  }
+
+  .renderer-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--stone-light);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: var(--warm-white);
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+
+  .renderer-textarea:focus { border-color: var(--sage); }
+
+  /* SUBMIT */
+  .submit-section {
+    max-width: 860px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .submit-btn {
+    background: var(--sage-dark);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .submit-btn:hover { background: #3d4d35; }
+
+  .submit-btn:disabled {
+    background: var(--stone-light);
+    color: var(--stone);
+    cursor: not-allowed;
+  }
+
+  .submit-btn .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  .submit-btn.loading .spinner { display: block; }
+  .submit-btn.loading .btn-text { display: none; }
+  .submit-btn.loading .btn-loading-text { display: inline; }
+  .submit-btn .btn-loading-text { display: none; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .submit-feedback {
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .submit-feedback.visible { opacity: 1; }
+
+  .submit-feedback a {
+    color: var(--sage-dark);
+    font-weight: 500;
+  }
+
+  /* FOOTER */
   .footer {
     text-align: center;
     padding: 2.5rem 2rem 3rem;
@@ -428,7 +531,7 @@
   @media print {
     body { background: white; }
     .check-item { break-inside: avoid; }
-    .progress-section, .status-banner { display: none; }
+    .progress-section, .status-banner, .submit-section { display: none; }
     .notes-toggle { display: none; }
     .notes-textarea.visible { display: block; border: 1px solid #ccc; }
   }
@@ -436,6 +539,7 @@
   @media (max-width: 600px) {
     .project-info, .progress-section { grid-template-columns: 1fr; }
     .check-item { padding: 0.75rem; gap: 0 0.75rem; }
+    .submit-section { flex-direction: column; align-items: stretch; }
   }
 </style>
 </head>
@@ -450,11 +554,11 @@
 <div class="project-info">
   <div class="project-field">
     <label>Project Name</label>
-    <input type="text" placeholder="e.g. 42 Riverside Terrace">
+    <input type="text" id="projectName" placeholder="e.g. 42 Riverside Terrace">
   </div>
   <div class="project-field">
     <label>Reviewed By</label>
-    <input type="text" placeholder="Name">
+    <input type="text" id="reviewedBy" placeholder="Name">
   </div>
 </div>
 
@@ -507,11 +611,36 @@
 
 <div class="checklist" id="elevatingList"></div>
 
+<div class="renderer-section">
+  <div class="section-divider-inner">
+    <div class="section-divider-line"></div>
+    <span class="section-divider-label">Notes for 3D Renderer</span>
+    <div class="section-divider-line"></div>
+  </div>
+  <p class="renderer-desc">Specific instructions, material callouts, or visual references for the rendering team.</p>
+  <textarea class="renderer-textarea" id="rendererNotes" placeholder="e.g. Ensure the corten steel retaining wall shows aged patina. The borrowed scenery of the mountain range should be visible through the gap in the hedge line. Lighting should emphasise shadow patterns from the feature Jacaranda at night..."></textarea>
+</div>
+
+<div class="submit-section">
+  <button class="submit-btn" id="submitBtn" onclick="submitBrief()">
+    <span class="btn-text">Generate Brief → Google Docs</span>
+    <span class="btn-loading-text">Generating...</span>
+    <div class="spinner"></div>
+  </button>
+  <span class="submit-feedback" id="submitFeedback"></span>
+</div>
+
 <footer class="footer">
   <p class="footer-quote">"The difference between a yard and a landscape is intention."</p>
 </footer>
 
 <script>
+// ============================================================
+// ⬇️  PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE  ⬇️
+// ============================================================
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXITHSuew52q0nBWD1jIq-Zi0yDpjYfDtFWlGW783J5uOtBUZms6cSK7b9jZw2d-o5/exec';
+// ============================================================
+
 const requiredData = [
   {
     category: "Composition & Restraint",
@@ -589,7 +718,7 @@ function buildItems(categories, tier) {
             <div class="item-check-for">${item.check}</div>
             <div class="item-notes">
               <button class="notes-toggle" onclick="toggleNotes(this)">+ Add note</button>
-              <textarea class="notes-textarea" placeholder="Notes on how this was addressed..."></textarea>
+              <textarea class="notes-textarea" data-note-id="${item.id}" placeholder="Notes on how this was addressed..."></textarea>
             </div>
           </div>
           <button class="na-toggle" data-id="${item.id}" data-tier="${tier}" onclick="handleNA(this)">N/A</button>
@@ -612,27 +741,31 @@ function countTier(tier) {
   return { checked, na };
 }
 
+function getStatusText() {
+  const req = countTier('required');
+  const elev = countTier('elevating');
+  const allReqMet = req.checked >= REQUIRED_TOTAL;
+  const elevMet = elev.checked >= ELEV_TARGET;
+  if (allReqMet && elevMet) return `✓ Excellence threshold met — ${req.checked + elev.checked} of 18 principles applied`;
+  if (allReqMet) return `✓ Non-negotiables met, ${ELEV_TARGET - elev.checked} more elevating needed`;
+  return `⚠ ${REQUIRED_TOTAL - req.checked} non-negotiables missing`;
+}
+
 function updateProgress() {
   const req = countTier('required');
   const elev = countTier('elevating');
 
   document.getElementById('reqCount').textContent = `${req.checked} / ${REQUIRED_TOTAL}`;
   document.getElementById('reqFill').style.width = ((req.checked / REQUIRED_TOTAL) * 100) + '%';
-
   document.getElementById('elevCount').textContent = `${elev.checked} / ${ELEV_TOTAL}`;
-  const elevPct = Math.min((elev.checked / ELEV_TARGET) * 100, 100);
-  document.getElementById('elevFill').style.width = elevPct + '%';
+  document.getElementById('elevFill').style.width = Math.min((elev.checked / ELEV_TARGET) * 100, 100) + '%';
 
-  // Status
   const banner = document.getElementById('statusBanner');
   const anyActivity = req.checked + req.na + elev.checked + elev.na > 0;
   const allReqMet = req.checked >= REQUIRED_TOTAL;
   const elevMet = elev.checked >= ELEV_TARGET;
 
-  if (!anyActivity) {
-    banner.className = 'status-inner';
-    return;
-  }
+  if (!anyActivity) { banner.className = 'status-inner'; return; }
 
   if (allReqMet && elevMet) {
     banner.className = 'status-inner visible success';
@@ -688,6 +821,80 @@ function toggleNotes(btn) {
   textarea.classList.toggle('visible');
   btn.textContent = textarea.classList.contains('visible') ? '− Hide note' : '+ Add note';
   if (textarea.classList.contains('visible')) textarea.focus();
+}
+
+function gatherItems(categories, tier) {
+  const items = [];
+  categories.forEach(cat => {
+    cat.items.forEach(item => {
+      const noteEl = document.querySelector(`[data-note-id="${item.id}"]`);
+      items.push({
+        title: item.title,
+        check: item.check,
+        state: state[tier][item.id] || 'unchecked',
+        notes: noteEl ? noteEl.value.trim() : ''
+      });
+    });
+  });
+  return items;
+}
+
+async function submitBrief() {
+  const btn = document.getElementById('submitBtn');
+  const feedback = document.getElementById('submitFeedback');
+  const projectName = document.getElementById('projectName').value.trim();
+
+  if (!projectName) {
+    feedback.textContent = 'Please enter a project name.';
+    feedback.style.color = '#c4724e';
+    feedback.classList.add('visible');
+    document.getElementById('projectName').focus();
+    return;
+  }
+
+  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    feedback.textContent = 'Apps Script URL not configured — see setup instructions in apps-script.js';
+    feedback.style.color = '#c4724e';
+    feedback.classList.add('visible');
+    return;
+  }
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+  feedback.classList.remove('visible');
+
+  const payload = {
+    projectName: projectName,
+    reviewedBy: document.getElementById('reviewedBy').value.trim(),
+    status: getStatusText(),
+    rendererNotes: document.getElementById('rendererNotes').value.trim(),
+    required: gatherItems(requiredData, 'required'),
+    elevating: gatherItems(elevatingData, 'elevating')
+  };
+
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    });
+
+    // no-cors means we can't read the response, so we optimistically confirm
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    feedback.innerHTML = '✓ Brief generated — check your <a href="https://drive.google.com" target="_blank">Google Drive</a> folder';
+    feedback.style.color = '#4a5a40';
+    feedback.classList.add('visible');
+
+  } catch (error) {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    feedback.textContent = 'Something went wrong. Please try again.';
+    feedback.style.color = '#c4724e';
+    feedback.classList.add('visible');
+    console.error('Submit error:', error);
+  }
 }
 </script>
 
