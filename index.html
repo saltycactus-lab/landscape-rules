@@ -151,11 +151,15 @@
     background: var(--warm-white);
     border: 1px solid rgba(184,176,162,0.3);
     border-radius: 2px;
-    padding: 2rem;
+    padding: 0;
     position: relative;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: default;
     overflow: hidden;
+  }
+
+  .card-content {
+    padding: 1.5rem 2rem 2rem;
   }
 
   .card::before {
@@ -179,11 +183,19 @@
     height: 100%;
   }
 
-  .card-icon {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+  .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
     display: block;
-    filter: grayscale(0.3);
+    filter: saturate(0.85);
+    transition: filter 0.4s ease;
+  }
+
+  .card:hover .card-img {
+    filter: saturate(1);
   }
 
   .card-title {
@@ -265,8 +277,8 @@
     .cards {
       grid-template-columns: 1fr;
     }
-    .card {
-      padding: 1.5rem;
+    .card-content {
+      padding: 1.2rem 1.5rem 1.5rem;
     }
     .hero {
       min-height: 80vh;
@@ -298,27 +310,33 @@
     <div class="cards">
 
       <div class="card">
-        <span class="card-icon">🏛️</span>
+        <img class="card-img" src="images/outdoor-rooms.jpg" alt="A beautifully defined outdoor living space with pergola, curtains and string lights" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Outdoor Rooms</h3>
         <p class="card-aka">The Foundational Concept</p>
         <p class="card-body">Every area in your landscape should have a clear purpose — a place to cook, to read, to gather, to be alone. Once you've defined the purpose, you define the space physically with "walls" (hedges, planting, screens), "floors" (paving, gravel, lawn), and "ceilings" (canopy, pergola, open sky). Purpose comes first, structure follows. Without both, outdoor space is just leftover space between the house and the fence.</p>
         <p class="card-takeaway">→ If you can't name the room, it isn't one yet.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">⛩️</span>
+        <img class="card-img" src="images/threshold.jpg" alt="Garden archway with climbing plants framing a path" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Threshold Moments</h3>
         <p class="card-aka">The Psychology of Arrival</p>
         <p class="card-body">Passing through something — a gate, an arbor, a narrowing of hedges, a material change underfoot — psychologically signals transition. It makes the space you enter feel more significant. Without thresholds, spaces blur into forgettable sameness.</p>
         <p class="card-takeaway">→ Every great room deserves a doorway.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">↔️</span>
+        <img class="card-img" src="images/tension-release.jpg" alt="Narrow hedge archway creating a compressed passage in a garden" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Tension & Release</h3>
         <p class="card-aka">Compression in Spatial Sequence</p>
         <p class="card-body">Compress visitors through a narrow, enclosed passage — then release them into openness. That contrast creates an emotional response people feel deeply but can't articulate. It's the same principle that makes cathedral naves powerful. The tighter the squeeze, the bigger the exhale.</p>
         <p class="card-takeaway">→ Narrow the path before the payoff.</p>
+        </div>
       </div>
 
     </div>
@@ -333,35 +351,43 @@
     <div class="cards">
 
       <div class="card">
-        <span class="card-icon">👣</span>
+        <img class="card-img" src="images/desire-paths.jpg" alt="A worn footpath cutting through tall grass in a meadow" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Desire Paths</h3>
         <p class="card-aka">Follow the Footprints</p>
         <p class="card-body">Watch where people actually walk — the worn trails through grass. Design around those natural movement patterns rather than imposing geometry. Fighting desire lines is a losing battle and a missed opportunity to let human behavior inform beauty.</p>
         <p class="card-takeaway">→ The path is already there. You just haven't paved it yet.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🌀</span>
+        <img class="card-img" src="images/mystery-bend.jpg" alt="A curving garden path disappearing into lush planting" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">The Mystery of the Bend</h3>
         <p class="card-aka">Never Reveal Everything</p>
         <p class="card-body">A curving path, a partially hidden area, a glimpse through a gap — the unseen is more compelling than the seen. When the entire garden is visible at once, the brain is satisfied instantly and stops engaging. Concealment creates curiosity.</p>
         <p class="card-takeaway">→ Show half. Let them imagine the rest.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🔄</span>
+        <img class="card-img" src="images/arrival-denial.jpg" alt="A winding vine-covered garden tunnel creating a meandering approach" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Arrival Denial</h3>
         <p class="card-aka">The Long Way Round</p>
         <p class="card-body">The best gardens and estates don't let you arrive directly. They route you past the destination, give you a glimpse, take it away, and then finally deliver you. This builds anticipation and makes arrival feel earned. A straight line to the front door is the least interesting solution.</p>
         <p class="card-takeaway">→ Make them want it before they get it.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🦶</span>
+        <img class="card-img" src="images/haptic.jpg" alt="Cobblestone paving with grass growing between the joints" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Haptic Transitions</h3>
         <p class="card-aka">Designing for Feet</p>
         <p class="card-body">Changing what's underfoot — flagstone to gravel to turf to wood — communicates through your body. Gravel slows you down. Smooth stone speeds you up. Material shifts signal boundaries and pace changes without a single sign. You're designing for the soles, not just the eyes.</p>
         <p class="card-takeaway">→ Your feet read the landscape before your brain does.</p>
+        </div>
       </div>
 
     </div>
@@ -376,19 +402,23 @@
     <div class="cards">
 
       <div class="card">
-        <span class="card-icon">🔊</span>
+        <img class="card-img" src="images/sound.jpg" alt="Ornamental pampas grasses swaying in the wind" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Sound Design</h3>
         <p class="card-aka">Scoring the Experience</p>
         <p class="card-body">A landscape has an acoustic signature. Ornamental grasses rustling in wind, water trickling at a precise volume to mask traffic noise, gravel crunching underfoot — these are deliberate design choices. The best designers compose a soundscape, not just a picture.</p>
         <p class="card-takeaway">→ Close your eyes. Can you still feel the garden?</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🌙</span>
+        <img class="card-img" src="images/night.jpg" alt="Trees dramatically uplighted at night with warm light and shadow play" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Night Architecture</h3>
         <p class="card-aka">Designing with Shadow</p>
         <p class="card-body">Most people light a landscape to see. Experts light to create shadow. Uplighting a tree isn't about the tree — it's about casting branching shadow patterns onto a wall. The interplay of light and dark is what makes a nighttime garden feel magical rather than merely illuminated.</p>
         <p class="card-takeaway">→ The shadows are the art. The lights are just the brush.</p>
+        </div>
       </div>
 
     </div>
@@ -403,43 +433,53 @@
     <div class="cards">
 
       <div class="card">
-        <span class="card-icon">🏔️</span>
+        <img class="card-img" src="images/borrowed-scenery.jpg" alt="Japanese garden viewed through a circular moon gate window" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Borrowed Scenery</h3>
         <p class="card-aka">Shakkei — 借景</p>
         <p class="card-body">A Japanese concept where you intentionally frame distant views — a mountain, a neighbor's beautiful tree, a church steeple — as part of your design. Strategic framing with plants or structures "captures" a view you don't own. Your garden becomes larger than your property.</p>
         <p class="card-takeaway">→ You don't have to own the view to design with it.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🎯</span>
+        <img class="card-img" src="images/focal-point.jpg" alt="Garden path with hedges leading the eye to a focal point" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Focal Point Terminus</h3>
         <p class="card-aka">Land the Eye Intentionally</p>
         <p class="card-body">Every sight line should end on something deliberate — a specimen tree, a bench, a vessel, sculpture. If your eye travels down a path and lands on an AC unit or a bare fence, the composition fails. Great landscapes leave nothing to chance at the end of a view.</p>
         <p class="card-takeaway">→ Follow every sight line. Where does it land?</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">◻️</span>
+        <img class="card-img" src="images/negative-space.jpg" alt="A lone tree on an open green hillside under clear blue sky" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Negative Space as Protagonist</h3>
         <p class="card-aka">The Power of Nothing</p>
         <p class="card-body">Just as in painting or music, what you leave out matters most. An empty gravel plane, a single tree in open lawn, a deliberately bare wall — restraint creates power. The amateur instinct is to fill every corner. The expert instinct is to ask "what can I remove?"</p>
         <p class="card-takeaway">→ Emptiness isn't absence. It's emphasis.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🌊</span>
+        <img class="card-img" src="images/drifts.jpg" alt="Rows of lavender in Provence flowing in mass drifts across the landscape" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Plant in Drifts, Not Specimens</h3>
         <p class="card-aka">Escaping the Botanical Zoo</p>
         <p class="card-body">Instead of one of this, one of that — repeat the same plant in flowing masses. This is how natural plant communities work, and it creates cohesion and calm that collecting never achieves. The difference between "busy" and "lush" is almost always repetition and rhythm.</p>
         <p class="card-takeaway">→ One plant repeated twenty times beats twenty plants used once.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🧱</span>
+        <img class="card-img" src="images/honest-materials.jpg" alt="Walled garden with real brick, timber trellises and gravel paths" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Honest Materials Only</h3>
         <p class="card-aka">The Faux Is Always Obvious</p>
         <p class="card-body">Real stone, real timber, real steel, real brick. Always. Composite decking, fake stone veneer, plastic edging, and artificial turf announce themselves instantly — not on day one, but by year two when they fade, warp, and age gracelessly. Genuine materials develop character over time. Faux materials just deteriorate. The cost difference is smaller than you think; the dignity difference is enormous.</p>
         <p class="card-takeaway">→ If the material is pretending to be something else, it's already failed.</p>
+        </div>
       </div>
 
     </div>
@@ -454,19 +494,23 @@
     <div class="cards">
 
       <div class="card">
-        <span class="card-icon">🍂</span>
+        <img class="card-img" src="images/seasonal.jpg" alt="Japanese maple in blazing autumn colour in a designed garden" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Seasonal Choreography</h3>
         <p class="card-aka">The Year-Round Stage</p>
         <p class="card-body">Design so something is performing in every season — winter bark and structure, spring bloom, summer texture, autumn fire. The real skill is sequencing so the garden is never "off." A landscape that only works in June is a landscape that fails eleven months a year.</p>
         <p class="card-takeaway">→ A garden should have no off-season.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">⏳</span>
+        <img class="card-img" src="images/patina.jpg" alt="Mossy weathered stone wall with ivy growing through the joints" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Designing for Decay & Patina</h3>
         <p class="card-aka">The Fourth Dimension</p>
         <p class="card-body">Great landscapes anticipate how materials age. Corten steel rusts beautifully. Copper turns green. Moss colonizes stone. Amateurs want everything to look new forever; experts choose materials that become more beautiful with time and design for that trajectory from day one.</p>
         <p class="card-takeaway">→ Design for year twenty, not day one.</p>
+        </div>
       </div>
 
     </div>
@@ -481,19 +525,23 @@
     <div class="cards">
 
       <div class="card">
-        <span class="card-icon">🌿</span>
+        <img class="card-img" src="images/right-plant.jpg" alt="Native wildflowers thriving naturally in a meadow" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Right Plant, Right Place</h3>
         <p class="card-aka">Stop Fighting Your Site</p>
         <p class="card-body">Instead of amending soil, irrigating constantly, and battling nature — choose plants that want to live where you're putting them. This single principle eliminates most maintenance headaches and produces landscapes that look effortless because they essentially are.</p>
         <p class="card-takeaway">→ The best gardens don't fight the land. They listen to it.</p>
+        </div>
       </div>
 
       <div class="card">
-        <span class="card-icon">🌳</span>
+        <img class="card-img" src="images/vertical.jpg" alt="Layered botanical garden with canopy trees, shrubs and groundcover at varying heights" loading="lazy">
+        <div class="card-content">
         <h3 class="card-title">Vertical Layering</h3>
         <p class="card-aka">Think Like a Forest</p>
         <p class="card-body">Most amateur landscapes work in one plane — the ground. Professionals think in canopy, understory, shrub, herbaceous, and ground cover layers — the way a forest naturally stacks. This creates fullness, biodiversity, and year-round interest even in a tiny garden.</p>
         <p class="card-takeaway">→ Five layers is richer than five hundred plants on one level.</p>
+        </div>
       </div>
 
     </div>
